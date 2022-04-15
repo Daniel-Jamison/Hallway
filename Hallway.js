@@ -102,7 +102,7 @@ function Squares(Time,n,delta)
 	{			
 		var b = rec/n + ((.1/n)*t)
 		
-		var c = Moth.pow(b,9)
+		var c = b*b*b*b*b*b*b*b*b
 		
 		var d = c*640
 		
