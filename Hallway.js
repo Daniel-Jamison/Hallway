@@ -3,7 +3,7 @@ window.onload = function init()
 {	
 	document.onkeydown = checkKey;
 	
-	var n = 64;
+	var n = 32;
 	var timestep = 50
 	
 	var steps = 0;
