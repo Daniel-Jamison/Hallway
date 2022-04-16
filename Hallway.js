@@ -15,7 +15,8 @@ window.onload = function init()
 
 function Rect(Time,n)
 {	
-	var delta = 302/640
+
+
 
 	var scale = 1;
 	var canvas = document.getElementById("myCanvas");
@@ -23,6 +24,10 @@ function Rect(Time,n)
 	height = Math.floor(window.innerHeight / scale);
 	canvas.width = width * scale;
 	canvas.height = height * scale;
+	
+	xcenter = width/2
+	ycenter = height/2
+	var delta = ycenter/xcenter
 	
 	
 	
@@ -72,26 +77,26 @@ function Hall(delta)
 	var ctx = document.getElementById("myCanvas").getContext("2d");
 	
 	ctx.fillStyle = "black";
-	ctx.fillRect(640-10, 302-(10*delta), 2*10, 2*(10*delta));
+	ctx.fillRect(xcenter-10, ycenter-(10*delta), 2*10, 2*(10*delta));
 
 	ctx.beginPath();
 	ctx.moveTo(0, 0);
-	ctx.lineTo(640, 302);
+	ctx.lineTo(xcenter, ycenter);
 	ctx.stroke();
 	
 	ctx.beginPath();
-	ctx.moveTo(1280, 0);
-	ctx.lineTo(640, 302);
+	ctx.moveTo(xcenter*2, 0);
+	ctx.lineTo(xcenter, ycenter);
 	ctx.stroke();
 	
 	ctx.beginPath();
-	ctx.moveTo(0, 604);
-	ctx.lineTo(640, 302);
+	ctx.moveTo(0, ycenter*2);
+	ctx.lineTo(xcenter, ycenter);
 	ctx.stroke();
 	
 	ctx.beginPath();
-	ctx.moveTo(1280, 604);
-	ctx.lineTo(640, 302);
+	ctx.moveTo(xcenter*2, ycenter*2);
+	ctx.lineTo(xcenter, ycenter);
 	ctx.stroke();
 }
 
@@ -106,12 +111,12 @@ function Squares(Time,n,delta)
 		
 		var c = b*b*b*b*b*b*b*b*b
 		
-		var d = c*640
+		var d = c*xcenter
 		
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
 		ctx.beginPath();
-		ctx.rect(640-d, 302-(d*delta), 2*d, 2*(d*delta));
+		ctx.rect(xcenter-d, ycenter-(d*delta), 2*d, 2*(d*delta));
 		ctx.stroke();
 	}
 }
@@ -135,9 +140,9 @@ function Squares2(Time,n,delta)
 		var e2 = Math.pow(b2,pow)
 		var e3 = Math.pow(b3,pow)
 		
-		var d1 = e1*640
-		var d2 = e2*640
-		var d3 = e3*640
+		var d1 = e1*xcenter
+		var d2 = e2*xcenter
+		var d3 = e3*xcenter
 		
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
@@ -148,37 +153,37 @@ function Squares2(Time,n,delta)
 		ctx.fillStyle = `rgb(255,255,255)`;
 		
 		ctx.beginPath();
-		ctx.moveTo(640-d1, 302-(d1*delta));
-		ctx.lineTo(640+d1, 302-(d1*delta));
-		ctx.lineTo(640+d2, 302-(d2*delta));
-		ctx.lineTo(640-d2, 302-(d2*delta));
+		ctx.moveTo(xcenter-d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter+d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter+d2, ycenter-(d2*delta));
+		ctx.lineTo(xcenter-d2, ycenter-(d2*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.moveTo(640-d1, 302+(d1*delta));
-		ctx.lineTo(640+d1, 302+(d1*delta));
-		ctx.lineTo(640+d2, 302+(d2*delta));
-		ctx.lineTo(640-d2, 302+(d2*delta));
+		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter+d2, ycenter+(d2*delta));
+		ctx.lineTo(xcenter-d2, ycenter+(d2*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.moveTo(640-d1, 302+(d1*delta));
-		ctx.lineTo(640-d1, 302-(d1*delta));
-		ctx.lineTo(640-d3, 302-(d3*delta));
-		ctx.lineTo(640-d3, 302+(d3*delta));
+		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter-d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter-d3, ycenter-(d3*delta));
+		ctx.lineTo(xcenter-d3, ycenter+(d3*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.moveTo(640+d1, 302-(d1*delta));
-		ctx.lineTo(640+d1, 302+(d1*delta));
-		ctx.lineTo(640+d3, 302+(d3*delta));
-		ctx.lineTo(640+d3, 302-(d3*delta));
+		ctx.moveTo(xcenter+d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter+d3, ycenter+(d3*delta));
+		ctx.lineTo(xcenter+d3, ycenter-(d3*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
@@ -186,37 +191,37 @@ function Squares2(Time,n,delta)
 		ctx.fillStyle = `rgb(0,0,0)`;
 		
 		ctx.beginPath();
-		ctx.moveTo(640-d1, 302-(d1*delta));
-		ctx.lineTo(640+d1, 302-(d1*delta));
-		ctx.lineTo(640+d3, 302-(d3*delta));
-		ctx.lineTo(640-d3, 302-(d3*delta));
+		ctx.moveTo(xcenter-d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter+d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter+d3, ycenter-(d3*delta));
+		ctx.lineTo(xcenter-d3, ycenter-(d3*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.moveTo(640-d1, 302+(d1*delta));
-		ctx.lineTo(640+d1, 302+(d1*delta));
-		ctx.lineTo(640+d3, 302+(d3*delta));
-		ctx.lineTo(640-d3, 302+(d3*delta));
+		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter+d3, ycenter+(d3*delta));
+		ctx.lineTo(xcenter-d3, ycenter+(d3*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.moveTo(640-d1, 302+(d1*delta));
-		ctx.lineTo(640-d1, 302-(d1*delta));
-		ctx.lineTo(640-d2, 302-(d2*delta));
-		ctx.lineTo(640-d2, 302+(d2*delta));
+		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter-d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter-d2, ycenter-(d2*delta));
+		ctx.lineTo(xcenter-d2, ycenter+(d2*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.moveTo(640+d1, 302-(d1*delta));
-		ctx.lineTo(640+d1, 302+(d1*delta));
-		ctx.lineTo(640+d2, 302+(d2*delta));
-		ctx.lineTo(640+d2, 302-(d2*delta));
+		ctx.moveTo(xcenter+d1, ycenter-(d1*delta));
+		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
+		ctx.lineTo(xcenter+d2, ycenter+(d2*delta));
+		ctx.lineTo(xcenter+d2, ycenter-(d2*delta));
 		ctx.closePath();
 		ctx.stroke()
 		ctx.fill();
@@ -228,8 +233,8 @@ function Shape(pos)
 {
 	var canvas = document.getElementById("myCanvas");
 	
-	var xpos2 = 640+pos+60
-	var xpos1 = 640+pos-60
+	var xpos2 = xcenter+pos+60
+	var xpos1 = xcenter+pos-60
 	
 	var p = ((258*((pos-60)-((70*(pos-60))/218)))/(pos-60))-148
 	
