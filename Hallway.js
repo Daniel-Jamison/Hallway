@@ -33,11 +33,14 @@ function Rect(Time,n)
 	
 	Squares2(Time,n,delta)			//Make Hall look like its moving
 		
-	pos = 350*Math.sin(Time/30);	
+	pos = (1/4)*width*Math.sin(Time/30);	
+	//pos = 350	
+	
+	Hall(delta)						//Make lines going toward center
 	
 	Shape(pos)						//Make object move around
 	
-	Hall(delta)						//Make lines going toward center
+	
 		
 }
 
@@ -150,7 +153,7 @@ function Squares2(Time,n,delta)
 		
 		//ctx.fillStyle = "grey";
 		//ctx.fillStyle = `rgb(${Math.floor(255*((s/n))+t)},${Math.floor(255*((s/n))+t)},${Math.floor(255*((s/n))+t)})`;
-		ctx.fillStyle = `rgb(255,255,255)`;
+		ctx.fillStyle = `rgb(0,0,0)`;
 		
 		ctx.beginPath();
 		ctx.moveTo(xcenter-d1, ycenter-(d1*delta));
@@ -188,7 +191,7 @@ function Squares2(Time,n,delta)
 		ctx.stroke()
 		ctx.fill();
 		
-		ctx.fillStyle = `rgb(0,0,0)`;
+		ctx.fillStyle = `rgb(255,255,255)`;
 		
 		ctx.beginPath();
 		ctx.moveTo(xcenter-d1, ycenter-(d1*delta));
@@ -233,10 +236,10 @@ function Shape(pos)
 {
 	var canvas = document.getElementById("myCanvas");
 	
-	var xpos2 = xcenter+pos+60
-	var xpos1 = xcenter+pos-60
+	var xpos2 = xcenter+pos+(width/20)
+	var xpos1 = xcenter+pos-(width/20)
 	
-	var p = ((258*((pos-60)-((70*(pos-60))/218)))/(pos-60))-148
+	var p = ((((258/604)*height)*((pos-(width/20))-((70*(pos-(width/20)))/218)))/(pos-(width/20)))-(148/604)*height
 	
 	var ctx = canvas.getContext('2d');
 	ctx.fillStyle = "gray";
@@ -244,37 +247,37 @@ function Shape(pos)
 	ctx.lineWidth = -3;
 	
 	ctx.beginPath();
-	ctx.moveTo(xpos1, 520);
-	ctx.lineTo(xpos1, 560);
-	ctx.lineTo(xpos1-((70*(pos-60))/218), 450+p);
-	ctx.lineTo(xpos1-((70*(pos-60))/218), 450);
+	ctx.moveTo(xpos1, (9/12)*height);
+	ctx.lineTo(xpos1, (10/12)*height);
+	ctx.lineTo(xpos1-((70*(pos-(width/20)))/218), (8/12)*height+p);
+	ctx.lineTo(xpos1-((70*(pos-(width/20)))/218), (8/12)*height);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
 	
 	ctx.beginPath();
-	ctx.moveTo(xpos2, 520);
-	ctx.lineTo(xpos2, 560);
-	ctx.lineTo(xpos2-((70*(pos+60))/218), 450+p);
-	ctx.lineTo(xpos2-((70*(pos+60))/218), 450);
+	ctx.moveTo(xpos2, (9/12)*height);
+	ctx.lineTo(xpos2, (10/12)*height);
+	ctx.lineTo(xpos2-((70*(pos+(width/20)))/218), (8/12)*height+p);
+	ctx.lineTo(xpos2-((70*(pos+(width/20)))/218), (8/12)*height);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
 	
 	ctx.beginPath();
-	ctx.moveTo(xpos1, 520);
-	ctx.lineTo(xpos2, 520);
-	ctx.lineTo(xpos2, 560);
-	ctx.lineTo(xpos1, 560);
+	ctx.moveTo(xpos1, (9/12)*height);
+	ctx.lineTo(xpos2, (9/12)*height);
+	ctx.lineTo(xpos2, (10/12)*height);
+	ctx.lineTo(xpos1, (10/12)*height);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.moveTo(xpos1, 520);
-	ctx.lineTo(xpos2, 520);
-	ctx.lineTo(xpos2-((70*(pos+60))/218), 450);
-	ctx.lineTo(xpos1-((70*(pos-60))/218), 450);
+	ctx.moveTo(xpos1, (9/12)*height);
+	ctx.lineTo(xpos2, (9/12)*height);
+	ctx.lineTo(xpos2-((70*(pos+(width/20)))/218), (8/12)*height);
+	ctx.lineTo(xpos1-((70*(pos-(width/20)))/218), (8/12)*height);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
