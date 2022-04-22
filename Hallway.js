@@ -27,24 +27,37 @@ function Rect(Time,n)
 	
 	xcenter = width/2
 	ycenter = height/2
-	var delta = ycenter/xcenter
+	
+	setx = xcenter+(xcenter*.5)*Math.sin(Time/20)
+	sety= ycenter+(ycenter*.5)*Math.cos(Time/20)
+	
+//	setx = .8*width
+//	sety= .5*height
 	
 	
 	
-	Squares2(Time,n,delta)			//Make Hall look like its moving
+	
+	delta1 = (setx)/(sety)
+	delta2 = (height-setx)/(sety)
+	delta3 = (height-setx)/(width-sety)
+	delta4 = (setx)/(width-sety)
+	
+	Squares(Time,n)			//Make Hall look like its moving
+	
+	Hall()						//Make lines going toward center
+
+	
+
 		
-	pos = (1/4)*width*Math.sin(Time/30);	
-	//pos = 350	
+	//pos = (1/4)*width*Math.sin(Time/30);	
+	pos = 350	
 	
-	Hall(delta)						//Make lines going toward center
+
 	
-	Shape(pos)						//Make object move around
+//	Shape(pos)						//Make object move around
 	
-	
-		
 }
 
-document.onkeydown = checkKey;
 
 function checkKey(e) 
 {
@@ -74,59 +87,141 @@ function checkKey(e)
 	return a
 }
 
-function Hall(delta)
+function Hall()
 {	
 	
 	var ctx = document.getElementById("myCanvas").getContext("2d");
 	
+	z1 = .03
+	
 	ctx.fillStyle = "black";
-	ctx.fillRect(xcenter-10, ycenter-(10*delta), 2*10, 2*(10*delta));
+	
+	ctx.beginPath();
+	ctx.moveTo(setx-z1*(setx-0),sety-z1*(sety-0));
+	ctx.lineTo(setx-z1*(setx-width),sety-z1*(sety-0));
+	ctx.lineTo(setx-z1*(setx-width),sety-z1*(sety-height));
+	ctx.lineTo(setx-z1*(setx-0),sety-z1*(sety-height));
+	ctx.closePath();
+	ctx.fill();
 
 	ctx.beginPath();
 	ctx.moveTo(0, 0);
-	ctx.lineTo(xcenter, ycenter);
+	ctx.lineTo(setx, sety);
 	ctx.stroke();
 	
 	ctx.beginPath();
-	ctx.moveTo(xcenter*2, 0);
-	ctx.lineTo(xcenter, ycenter);
+	ctx.moveTo(width, 0);
+	ctx.lineTo(setx, sety);
 	ctx.stroke();
 	
 	ctx.beginPath();
-	ctx.moveTo(0, ycenter*2);
-	ctx.lineTo(xcenter, ycenter);
+	ctx.moveTo(width, height);
+	ctx.lineTo(setx, sety);
 	ctx.stroke();
 	
 	ctx.beginPath();
-	ctx.moveTo(xcenter*2, ycenter*2);
-	ctx.lineTo(xcenter, ycenter);
+	ctx.moveTo(0, height);
+	ctx.lineTo(setx, sety);
 	ctx.stroke();
 }
 
-function Squares(Time,n,delta)
+function Squares(Time,n)
 {
-	
+	var ctx = document.getElementById("myCanvas").getContext("2d");
+			
 	var t = Time % 10
-	
-	for (let rec = 0; rec < n; rec++) 
-	{			
-		var b = rec/n + ((.1/n)*t)
+	t = 4
+	for (let s = 0; s < n; s++) 
+	{
+		var b1 = (2*s)/n + ((.2/n)*t)
+		var b2 = ((2*s)-1)/n + ((.2/n)*t)
+		var b3 = ((2*s)+1)/n + ((.2/n)*t)
+		//var b1 = b+(.05*(2*s))
+		//var b2 = b+(.05*(2*s+1))
 		
-		var c = b*b*b*b*b*b*b*b*b
+		pow = 11
+					
+		var e1 = Math.pow(b1,pow)
+		var e2 = Math.pow(b2,pow)
+		var e3 = Math.pow(b3,pow)
+				
+		ctx.strokeStyle = "black";
 		
-		var d = c*xcenter
-		
-		var c = document.getElementById("myCanvas");
-		var ctx = c.getContext("2d");
+		ctx.fillStyle = `rgb(255,255,255)`;
+				
 		ctx.beginPath();
-		ctx.rect(xcenter-d, ycenter-(d*delta), 2*d, 2*(d*delta));
-		ctx.stroke();
+		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-0));
+		ctx.lineTo(setx-e2*(setx-0),sety-e2*(sety-0));
+		ctx.lineTo(setx-e2*(setx-0),sety-e2*(sety-height));
+		ctx.lineTo(setx-e1*(setx-0),sety-e1*(sety-height));
+		ctx.closePath();
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-width),sety-e1*(sety-0));
+		ctx.lineTo(setx-e2*(setx-width),sety-e2*(sety-0));
+		ctx.lineTo(setx-e2*(setx-width),sety-e2*(sety-height));
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-height));
+		ctx.closePath();
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-0));
+		ctx.lineTo(setx-e2*(setx-0),sety-e2*(sety-0));
+		ctx.lineTo(setx-e2*(setx-width),sety-e2*(sety-0));
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-0))
+		ctx.closePath();
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-height));
+		ctx.lineTo(setx-e2*(setx-0),sety-e2*(sety-height));
+		ctx.lineTo(setx-e2*(setx-width),sety-e2*(sety-height));
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-height));
+		ctx.closePath();
+		ctx.fill();
+		
+		
+		
+		ctx.fillStyle = `rgb(90,90,90)`;
+		
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-0));
+		ctx.lineTo(setx-e3*(setx-0),sety-e3*(sety-0));
+		ctx.lineTo(setx-e3*(setx-0),sety-e3*(sety-height));
+		ctx.lineTo(setx-e1*(setx-0),sety-e1*(sety-height));
+		ctx.closePath();
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-width),sety-e1*(sety-0));
+		ctx.lineTo(setx-e3*(setx-width),sety-e3*(sety-0));
+		ctx.lineTo(setx-e3*(setx-width),sety-e3*(sety-height));
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-height));
+		ctx.closePath();
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-0));
+		ctx.lineTo(setx-e3*(setx-0),sety-e3*(sety-0));
+		ctx.lineTo(setx-e3*(setx-width),sety-e3*(sety-0));
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-0))
+		ctx.closePath();
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-height));
+		ctx.lineTo(setx-e3*(setx-0),sety-e3*(sety-height));
+		ctx.lineTo(setx-e3*(setx-width),sety-e3*(sety-height));
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-height));
+		ctx.closePath();
+		ctx.fill();
 	}
-}
 
-function Squares2(Time,n,delta)
+}
+function Squares2()
 {
-	
 	var t = Time % 10
 	
 	for (let s = 0; s < n; s++) 
@@ -276,8 +371,8 @@ function Shape(pos)
 	ctx.beginPath();
 	ctx.moveTo(xpos1, (9/12)*height);
 	ctx.lineTo(xpos2, (9/12)*height);
-	ctx.lineTo(xpos2-((70*(pos+(width/20)))/218), (8/12)*height);
-	ctx.lineTo(xpos1-((70*(pos-(width/20)))/218), (8/12)*height);
+	ctx.lineTo(xpos2-(((pos+(width/20)))/3), (8/12)*height);
+	ctx.lineTo(xpos1-(((pos-(width/20)))/3), (8/12)*height);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
