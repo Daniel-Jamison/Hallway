@@ -31,10 +31,8 @@ function Rect(Time,n)
 	setx = xcenter+(xcenter*.5)*Math.sin(Time/20)
 	sety= ycenter+(ycenter*.5)*Math.cos(Time/20)
 	
-//	setx = .8*width
-//	sety= .5*height
-	
-	
+	//setx = .8*width
+	//sety= .5*height
 	
 	
 	delta1 = (setx)/(sety)
@@ -50,11 +48,11 @@ function Rect(Time,n)
 
 		
 	//pos = (1/4)*width*Math.sin(Time/30);	
-	pos = 350	
+	pos = 0	
 	
 
 	
-//	Shape(pos)						//Make object move around
+	Shape(pos)						//Make object move around
 	
 }
 
@@ -130,7 +128,7 @@ function Squares(Time,n)
 	var ctx = document.getElementById("myCanvas").getContext("2d");
 			
 	var t = Time % 10
-	
+	t =4
 	for (let s = 0; s < n; s++) 
 	{
 		var b1 = (2*s)/n + ((.2/n)*t)
@@ -169,7 +167,7 @@ function Squares(Time,n)
 		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-0));
 		ctx.lineTo(setx-e2*(setx-0),sety-e2*(sety-0));
 		ctx.lineTo(setx-e2*(setx-width),sety-e2*(sety-0));
-		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-0))
+		ctx.lineTo(setx-e1*(setx-width),sety-e1*(sety-0));
 		ctx.closePath();
 		ctx.fill();
 		
@@ -220,159 +218,65 @@ function Squares(Time,n)
 	}
 
 }
-function Squares2()
-{
-	var t = Time % 10
-	
-	for (let s = 0; s < n; s++) 
-	{
-		var b1 = (2*s)/n + ((.2/n)*t)
-		var b2 = ((2*s)-1)/n + ((.2/n)*t)
-		var b3 = ((2*s)+1)/n + ((.2/n)*t)
-		//var b1 = b+(.05*(2*s))
-		//var b2 = b+(.05*(2*s+1))
-		
-		pow = 10
-					
-		var e1 = Math.pow(b1,pow)
-		var e2 = Math.pow(b2,pow)
-		var e3 = Math.pow(b3,pow)
-		
-		var d1 = e1*xcenter
-		var d2 = e2*xcenter
-		var d3 = e3*xcenter
-		
-		var c = document.getElementById("myCanvas");
-		var ctx = c.getContext("2d");
-		//var ctx = canvas.getContext('2d');
-		
-		//ctx.fillStyle = "grey";
-		//ctx.fillStyle = `rgb(${Math.floor(255*((s/n))+t)},${Math.floor(255*((s/n))+t)},${Math.floor(255*((s/n))+t)})`;
-		ctx.fillStyle = `rgb(0,0,0)`;
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter-d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter+d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter+d2, ycenter-(d2*delta));
-		ctx.lineTo(xcenter-d2, ycenter-(d2*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter+d2, ycenter+(d2*delta));
-		ctx.lineTo(xcenter-d2, ycenter+(d2*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter-d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter-d3, ycenter-(d3*delta));
-		ctx.lineTo(xcenter-d3, ycenter+(d3*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter+d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter+d3, ycenter+(d3*delta));
-		ctx.lineTo(xcenter+d3, ycenter-(d3*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.fillStyle = `rgb(255,255,255)`;
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter-d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter+d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter+d3, ycenter-(d3*delta));
-		ctx.lineTo(xcenter-d3, ycenter-(d3*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter+d3, ycenter+(d3*delta));
-		ctx.lineTo(xcenter-d3, ycenter+(d3*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter-d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter-d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter-d2, ycenter-(d2*delta));
-		ctx.lineTo(xcenter-d2, ycenter+(d2*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-		
-		ctx.beginPath();
-		ctx.moveTo(xcenter+d1, ycenter-(d1*delta));
-		ctx.lineTo(xcenter+d1, ycenter+(d1*delta));
-		ctx.lineTo(xcenter+d2, ycenter+(d2*delta));
-		ctx.lineTo(xcenter+d2, ycenter-(d2*delta));
-		ctx.closePath();
-		ctx.stroke()
-		ctx.fill();
-
-	}
-}
 
 function Shape(pos)
 {
 	var canvas = document.getElementById("myCanvas");
 	
-	var xpos2 = xcenter+pos+(width/20)
-	var xpos1 = xcenter+pos-(width/20)
-	
-	var p = ((((258/604)*height)*((pos-(width/20))-((70*(pos-(width/20)))/218)))/(pos-(width/20)))-(148/604)*height
-	
+		
 	var ctx = canvas.getContext('2d');
 	ctx.fillStyle = "gray";
 	ctx.strokeStyle = "black";
 	ctx.lineWidth = -3;
 	
+	var xposb2 = xcenter+pos+(width/20)
+	var xposb1 = xcenter+pos-(width/20)
+	
+	var xposf2 = xposb2-(.2*(xposb2-setx))
+	var xposf1 = xposb1-(.2*(xposb1-setx))
+	
+	var backg = sety+((10/12)*(height-sety))
+	var backu = backg-50
+	
+	var frontg = backg-(.2*(backg-sety))
+	var frontu = backu-(.2*(backu-sety))
+	
+	
+	
+	
+	
 	ctx.beginPath();
-	ctx.moveTo(xpos1, (9/12)*height);
-	ctx.lineTo(xpos1, (10/12)*height);
-	ctx.lineTo(xpos1-((70*(pos-(width/20)))/218), (8/12)*height+p);
-	ctx.lineTo(xpos1-((70*(pos-(width/20)))/218), (8/12)*height);
+	ctx.moveTo(xposb1, backu);
+	ctx.lineTo(xposb1, backg);
+	ctx.lineTo(xposf1, frontg);
+	ctx.lineTo(xposf1, frontu);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
 	
 	ctx.beginPath();
-	ctx.moveTo(xpos2, (9/12)*height);
-	ctx.lineTo(xpos2, (10/12)*height);
-	ctx.lineTo(xpos2-((70*(pos+(width/20)))/218), (8/12)*height+p);
-	ctx.lineTo(xpos2-((70*(pos+(width/20)))/218), (8/12)*height);
+	ctx.moveTo(xposb2, backu);
+	ctx.lineTo(xposb2, backg);
+	ctx.lineTo(xposf2, frontg);
+	ctx.lineTo(xposf2, frontu);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
 	
 	ctx.beginPath();
-	ctx.moveTo(xpos1, (9/12)*height);
-	ctx.lineTo(xpos2, (9/12)*height);
-	ctx.lineTo(xpos2, (10/12)*height);
-	ctx.lineTo(xpos1, (10/12)*height);
+	ctx.moveTo(xposb1, backu);
+	ctx.lineTo(xposb1, backg);
+	ctx.lineTo(xposb2, backg);
+	ctx.lineTo(xposb2, backu);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
-
+	
 	ctx.beginPath();
-	ctx.moveTo(xpos1, (9/12)*height);
-	ctx.lineTo(xpos2, (9/12)*height);
-	ctx.lineTo(xpos2-(((pos+(width/20)))/3), (8/12)*height);
-	ctx.lineTo(xpos1-(((pos-(width/20)))/3), (8/12)*height);
+	ctx.moveTo(xposb1, backu);
+	ctx.lineTo(xposb2, backu);
+	ctx.lineTo(xposf2, frontu);
+	ctx.lineTo(xposf1, frontu);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
