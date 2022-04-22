@@ -130,7 +130,7 @@ function Squares(Time,n)
 	var ctx = document.getElementById("myCanvas").getContext("2d");
 			
 	var t = Time % 10
-	t = 4
+	
 	for (let s = 0; s < n; s++) 
 	{
 		var b1 = (2*s)/n + ((.2/n)*t)
