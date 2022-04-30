@@ -1,3 +1,9 @@
+var c = window.innerWidth / 2
+var r = window.innerHeight / 2
+
+var xblock = 0
+
+
 window.onload = function init()
 
 {	
@@ -5,34 +11,41 @@ window.onload = function init()
 	
 	var n = 64;
 	var timestep = 50
+
 	
 	var steps = 0;
 	var intervalId = setInterval(function(){Rect(steps,n);
 	   steps++;
 	}, timestep);
+	window.addEventListener("mousemove", draw);
+	window.addEventListener("keydown", arrow);
 }
 
 
 function Rect(Time,n)
 {	
 
-
-
 	var scale = 1;
 	var canvas = document.getElementById("myCanvas");
 	width = Math.floor(window.innerWidth / scale);
 	height = Math.floor(window.innerHeight / scale);
-	canvas.width = width * scale;
-	canvas.height = height * scale;
+	canvas.width = width * scale-5;
+	canvas.height = height * scale-5;
 	
 	xcenter = width/2
 	ycenter = height/2
 	
-	setx = xcenter+(xcenter*.5)*Math.sin(Time/20)
-	sety= ycenter+(ycenter*.5)*Math.cos(Time/20)
+	s = Math.random()
+	console.log(s)
 	
-	//setx = .8*width
-	//sety= .5*height
+//	setx = xcenter+(xcenter*.5)*Math.sin(Time/20)
+//	sety= ycenter+(ycenter*.5)*Math.cos(Time/20)
+	
+//	setx = .8*width
+//	sety= .5*height
+
+	setx = r
+	sety = c
 	
 	
 	delta1 = (setx)/(sety)
@@ -48,41 +61,20 @@ function Rect(Time,n)
 
 		
 	//pos = (1/4)*width*Math.sin(Time/30);	
-	pos = 0	
+	pos = xblock	
+	
+	pos2 = 0
 	
 
 	
-	Shape(pos)						//Make object move around
-	
+	Shape(pos,z)						//Make object move around
+
 }
 
 
 function checkKey(e) 
 {
 
-	var a
-
-    e = e || window.event;
-
-    if (e.keyCode == '38') {
-        // up arrow
-    }
-    else if (e.keyCode == '40') {
-        // down arrow
-    }
-    else if (e.keyCode == '37') {
-       // left arrow
-	   a = -1;
-    }
-    else if (e.keyCode == '39') {
-       // right arrow
-	   a = 1;
-    }
-	else {
-		a = 0;
-	}
-	console.log(a);
-	return a
 }
 
 function Hall()
@@ -145,7 +137,8 @@ function Squares(Time,n)
 				
 		ctx.strokeStyle = "black";
 		
-		ctx.fillStyle = `rgb(255,255,255)`;
+		ctx.fillStyle = `rgb(210,210,210)`;
+//		ctx.fillStyle = `rgb(0,255,255)`;
 				
 		ctx.beginPath();
 		ctx.moveTo(setx-e1*(setx-0),sety-e1*(sety-0));
@@ -181,7 +174,8 @@ function Squares(Time,n)
 		
 		
 		
-		ctx.fillStyle = `rgb(90,90,90)`;
+		ctx.fillStyle = `rgb(200,200,200)`;
+//		ctx.fillStyle = `rgb(90,255,0)`;
 		
 		
 		ctx.beginPath();
@@ -219,7 +213,7 @@ function Squares(Time,n)
 
 }
 
-function Shape(pos)
+function Shape(pos,z)
 {
 	var canvas = document.getElementById("myCanvas");
 	
@@ -235,14 +229,12 @@ function Shape(pos)
 	var xposf2 = xposb2-(.2*(xposb2-setx))
 	var xposf1 = xposb1-(.2*(xposb1-setx))
 	
-	var backg = sety+((10/12)*(height-sety))
-	var backu = backg-50
+//	var backg = sety+(.85*(height-sety))
+	var backg = height
+	var backu = backg-.09*height
 	
 	var frontg = backg-(.2*(backg-sety))
 	var frontu = backu-(.2*(backu-sety))
-	
-	
-	
 	
 	
 	ctx.beginPath();
@@ -265,19 +257,57 @@ function Shape(pos)
 	
 	ctx.beginPath();
 	ctx.moveTo(xposb1, backu);
-	ctx.lineTo(xposb1, backg);
-	ctx.lineTo(xposb2, backg);
-	ctx.lineTo(xposb2, backu);
-	ctx.closePath();
-	ctx.stroke()
-	ctx.fill();
-	
-	ctx.beginPath();
-	ctx.moveTo(xposb1, backu);
 	ctx.lineTo(xposb2, backu);
 	ctx.lineTo(xposf2, frontu);
 	ctx.lineTo(xposf1, frontu);
 	ctx.closePath();
 	ctx.stroke()
 	ctx.fill();
+	
+	ctx.beginPath();
+	ctx.moveTo(xposb1, backu);
+	ctx.lineTo(xposb1, backg);
+	ctx.lineTo(xposb2, backg);
+	ctx.lineTo(xposb2, backu);
+	ctx.closePath();
+	ctx.stroke()
+	ctx.fill();
+}
+
+function draw(event)
+{
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext('2d');
+	
+	var rect = canvas.getBoundingClientRect();
+	c = Math.floor((event.clientY-rect.top))
+	r = Math.floor((event.clientX))	
+}
+
+function arrow(e)
+{
+	
+
+	var a
+	
+    if (e.keyCode == '38') {
+        // up arrow
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+    }
+    else if (e.keyCode == '37') {
+       // left arrow
+	   a = -1;
+    }
+    else if (e.keyCode == '39') {
+       // right arrow
+	   a = 1;
+    }
+	else {
+		a = 0;
+	}
+	console.log(a);
+	
+	xblock = xblock+10*a
 }
